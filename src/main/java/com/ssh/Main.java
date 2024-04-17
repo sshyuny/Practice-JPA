@@ -7,6 +7,23 @@ import jakarta.persistence.Persistence;
 
 public class Main {
 
+    static void jpql1(EntityManager em) {
+        Food food1 = new Food("쌀밥", FoodType.RICE);
+        Food food2 = new Food("칼국수", FoodType.NOODLE);
+        Food food3 = new Food("삼겹살", FoodType.PROTIEN);
+        em.persist(food1);
+        em.persist(food2);
+        em.persist(food3);
+        
+        em.flush();
+        em.clear();
+
+        Long result = em.createQuery("select count(f) from Food f", Long.class)
+                .getSingleResult();        
+
+        System.out.println("result = " + result);
+    }
+
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa-practice");
         EntityManager em = emf.createEntityManager();
@@ -15,15 +32,7 @@ public class Main {
         tx.begin();
 
         try {
-            Food food = new Food();
-            food.setName("순대국밥");
-            em.persist(food);
-            
-            em.flush();
-            em.clear();
-            
-            Food selectedFood = em.find(Food.class, food.getId());
-            System.out.println("selectedFood.name = " + selectedFood.getName());
+            jpql1(em);
             
             tx.commit();
             
