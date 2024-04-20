@@ -1,5 +1,8 @@
 package com.ssh;
 
+import com.ssh.entity.Food;
+import com.ssh.entity.FoodType;
+
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
@@ -15,15 +18,7 @@ public class Main {
         tx.begin();
 
         try {
-            Food food = new Food();
-            food.setName("순대국밥");
-            em.persist(food);
-            
-            em.flush();
-            em.clear();
-            
-            Food selectedFood = em.find(Food.class, food.getId());
-            System.out.println("selectedFood.name = " + selectedFood.getName());
+            JpqlPractice.jpql1(em);
             
             tx.commit();
             
