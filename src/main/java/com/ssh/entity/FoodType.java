@@ -1,4 +1,4 @@
-package com.ssh;
+package com.ssh.entity;
 
 public enum FoodType {
     NOODLE, RICE, PROTIEN, BREAD

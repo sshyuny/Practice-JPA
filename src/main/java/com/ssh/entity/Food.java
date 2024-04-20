@@ -1,4 +1,4 @@
-package com.ssh;
+package com.ssh.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -22,9 +22,13 @@ public class Food {
     @Enumerated(EnumType.STRING)
     private FoodType foodType;
 
-    public Food(String name, FoodType foodType) {
+    // 1 ~ 5
+    private int preferenceLevel;
+
+    public Food(String name, FoodType foodType, int perferenceLevel) {
         this.name = name;
         this.foodType = foodType;
+        this.preferenceLevel = perferenceLevel;
     }
 
 }
