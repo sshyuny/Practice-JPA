@@ -1,8 +1,5 @@
 package com.ssh;
 
-import com.ssh.entity.Food;
-import com.ssh.entity.FoodType;
-
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
