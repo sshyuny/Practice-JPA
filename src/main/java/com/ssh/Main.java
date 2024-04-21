@@ -15,7 +15,7 @@ public class Main {
         tx.begin();
 
         try {
-            JpqlPractice.jpql1(em);
+            JpqlPractice.basicSelect(em);
             
             tx.commit();
             
