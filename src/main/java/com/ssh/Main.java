@@ -15,7 +15,8 @@ public class Main {
         tx.begin();
 
         try {
-            JpqlPractice.basicSelect(em);
+            // RelationPractice.manyToOneWithTwoWay1(em);
+            RelationPractice.manyToOneWithTwoWay2(em);
             
             tx.commit();
             

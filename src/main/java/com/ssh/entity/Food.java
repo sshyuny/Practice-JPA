@@ -1,10 +1,13 @@
 package com.ssh.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,6 +18,7 @@ import lombok.Setter;
 public class Food {
     
     @Id @GeneratedValue
+    @Column(name = "food_id")
     private Long id;
 
     private String name;
@@ -25,10 +29,17 @@ public class Food {
     // 1 ~ 5
     private int preferenceLevel;
 
+    @ManyToOne
+    @JoinColumn(name = "member_id")
+    private Member member;
+
     public Food(String name, FoodType foodType, int perferenceLevel) {
         this.name = name;
         this.foodType = foodType;
         this.preferenceLevel = perferenceLevel;
+    }
+
+    protected Food() {
     }
 
 }
