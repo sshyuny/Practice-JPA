@@ -33,10 +33,10 @@ public class Food {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    public Food(String name, FoodType foodType, int perferenceLevel) {
+    public Food(String name, FoodType foodType, int preferenceLevel) {
         this.name = name;
         this.foodType = foodType;
-        this.preferenceLevel = perferenceLevel;
+        this.preferenceLevel = preferenceLevel;
     }
 
     protected Food() {

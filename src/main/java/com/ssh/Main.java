@@ -1,5 +1,7 @@
 package com.ssh;
 
+import com.ssh.practice.RelationPractice;
+
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;

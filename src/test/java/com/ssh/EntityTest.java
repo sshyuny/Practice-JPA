@@ -1,6 +1,10 @@
+package com.ssh;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
+import com.ssh.entity.Food;
+import com.ssh.entity.FoodType;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -21,7 +25,6 @@ public class EntityTest {
 
         tx.begin();
     }
-
     @AfterAll
     static void afterAll() {
         tx.commit();
@@ -31,8 +34,7 @@ public class EntityTest {
 
     @Test
     void test() {
-        Food food = new Food();
-        food.setName("순대국밥");
-        em.persist(food);
+        Food food1 = new Food("김치볶음밥", FoodType.RICE, 4);
+        em.persist(food1);
     }
 }

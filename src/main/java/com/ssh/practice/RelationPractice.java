@@ -1,4 +1,4 @@
-package com.ssh;
+package com.ssh.practice;
 
 import com.ssh.entity.Food;
 import com.ssh.entity.FoodType;
@@ -6,9 +6,12 @@ import com.ssh.entity.Member;
 
 import jakarta.persistence.EntityManager;
 
+/*
+ * 연관관계 매핑 연습
+ */
 public class RelationPractice {
 
-    static void manyToOneWithTwoWay1(EntityManager em) {
+    public static void manyToOneWithTwoWay1(EntityManager em) {
         Food food1 = new Food("김치볶음밥", FoodType.RICE, 4);
         Food food2 = new Food("칼국수", FoodType.NOODLE, 3);
         em.persist(food1);
@@ -24,7 +27,7 @@ public class RelationPractice {
         em.clear();
     }
 
-    static void manyToOneWithTwoWay2(EntityManager em) {
+    public static void manyToOneWithTwoWay2(EntityManager em) {
         Member member1 = new Member();
         member1.setName("sshyuny");
         em.persist(member1);
@@ -41,6 +44,7 @@ public class RelationPractice {
 
         Food selectedFood1 = em.find(Food.class, food1.getId());
         Food selectedFood2 = em.find(Food.class, food2.getId());
+        
         System.out.println("selectedFood1.member = " + selectedFood1.getMember().getName());
         System.out.println("selectedFood2.member = " + selectedFood2.getMember().getName());
     }
