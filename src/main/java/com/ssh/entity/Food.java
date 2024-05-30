@@ -7,13 +7,18 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import lombok.Getter;
 import lombok.Setter;
 
-@Entity
-@Table(name = "Food")
+@Entity(name = "Food")
+@Table(name = "M_FOOD" , uniqueConstraints = {@UniqueConstraint (
+    name = "NAME_TYPE_UNIQUE",
+    columnNames = {"name", "foodType"}
+)})
 @Getter @Setter
 public class Food {
     
@@ -21,6 +26,7 @@ public class Food {
     @Column(name = "food_id")
     private Long id;
 
+    @Column(nullable = false, length = 64)
     private String name;
 
     @Enumerated(EnumType.STRING)
@@ -28,6 +34,9 @@ public class Food {
 
     // 1 ~ 5
     private int preferenceLevel;
+
+    @Lob
+    private String detail;
 
     @ManyToOne
     @JoinColumn(name = "member_id")
