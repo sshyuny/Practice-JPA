@@ -1,6 +1,6 @@
 package com.ssh;
 
-import com.ssh.practice.RelationPractice;
+import com.ssh.practice.JpqlPractice;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -17,8 +17,7 @@ public class Main {
         tx.begin();
 
         try {
-            // RelationPractice.manyToOneWithTwoWay1(em);
-            RelationPractice.manyToOneWithTwoWay2(em);
+            JpqlPractice.basicSelect(em);
             
             tx.commit();
             

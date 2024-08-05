@@ -36,12 +36,5 @@ public class JpqlPractice {
         System.out.println("countResult = " + countResult);
         System.out.println("sumResult = " + sumResult);
     }
-
-    /*
-     * JPQL 프로젝션
-     */
-    public static void projection(EntityManager em) {
- 
-    }
     
 }

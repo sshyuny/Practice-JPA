@@ -1,1 +1,5 @@
+# Source
 target/
+
+# MAC
+.DS_Store
