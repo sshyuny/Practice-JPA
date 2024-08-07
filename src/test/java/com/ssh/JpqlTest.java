@@ -8,8 +8,8 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import com.ssh.entity.Food;
-import com.ssh.entity.FoodType;
+import com.ssh.entity.jpql.Food;
+import com.ssh.entity.jpql.FoodType;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;

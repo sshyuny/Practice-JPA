@@ -1,29 +1,26 @@
-package com.ssh.entity;
+package com.ssh.entity.jpql;
+
+import com.ssh.entity.relationMapping.Library;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.persistence.UniqueConstraint;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity(name = "Food")
-@Table(name = "M_FOOD" , uniqueConstraints = {@UniqueConstraint (
-    name = "NAME_TYPE_UNIQUE",
-    columnNames = {"name", "foodType"}
-)})
+@Table(name = "FOOD_JPQL")
 @Getter @Setter
 public class Food {
     
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue
     @Column(name = "food_id")
     private Long id;
 
@@ -41,7 +38,7 @@ public class Food {
 
     @ManyToOne
     @JoinColumn(name = "member_id")
-    private Member member;
+    private Library member;
 
     public Food(String name, FoodType foodType, int preferenceLevel) {
         this.name = name;

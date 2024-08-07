@@ -4,9 +4,8 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import com.ssh.entity.Food;
-import com.ssh.entity.FoodType;
-import com.ssh.entity.Member;
+import com.ssh.entity.relationMapping.Book;
+import com.ssh.entity.relationMapping.Library;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -38,25 +37,21 @@ public class RelationMappingTest {
     }
 
     @Test
-    void 다대일() {
-        Member member1 = new Member();
-        member1.setName("sshyuny");
-        em.persist(member1);
+    void 일대다_단방향() {
+        Library library = new Library();
+        em.persist(library);
 
-        Food food1 = new Food("김치볶음밥", FoodType.RICE, 4);
-        Food food2 = new Food("칼국수", FoodType.NOODLE, 3);
-        food1.setMember(member1);
-        food2.setMember(member1);
-        em.persist(food1);
-        em.persist(food2);
-
-        em.flush();
-        em.clear();
-
-        Food selectedFood1 = em.find(Food.class, food1.getId());
-        Food selectedFood2 = em.find(Food.class, food2.getId());
+        Book bookA = new Book();
+        bookA.setIsbn("987-654");
+        em.persist(bookA);
+        Book bookB = new Book();
+        bookB.setIsbn("987-655");
+        em.persist(bookB);
         
-        System.out.println("selectedFood1.member = " + selectedFood1.getMember().getName());
-        System.out.println("selectedFood2.member = " + selectedFood2.getMember().getName());
+        library.getBooks().add(bookA);
+        library.getBooks().add(bookB);
+
+        // Library의 필드를 변경했지만
+        // 실행하면 Book 테이블에 update 쿼리 나간 것 확인할 수 있다!
     }
 }

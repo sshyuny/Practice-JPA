@@ -1,4 +1,4 @@
-package com.ssh.entity;
+package com.ssh.entity.entityMapping;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -10,16 +10,16 @@ import lombok.Setter;
 
 @Entity
 @TableGenerator(
-    name = "FRUIT_SEQ_GENERATOR",
+    name = "RETRIEVER_SEQ_GENERATOR",
     table = "MY_SEQUENCES",
-    pkColumnValue = "FRUIT_SEQ", allocationSize = 2
+    pkColumnValue = "RETRIEVER_SEQ", allocationSize = 2
 )
 @Getter @Setter
-public class Fruit {
+public class Retriever {
     
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE,
-        generator = "FRUIT_SEQ_GENERATOR")
+        generator = "RETRIEVER_SEQ_GENERATOR")
     private Long id;
 
 }

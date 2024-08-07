@@ -1,4 +1,4 @@
-package com.ssh.entity;
+package com.ssh.entity.entityMapping;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -7,10 +7,10 @@ import lombok.Setter;
 
 @Entity
 @Getter @Setter
-public class Dog {
+public class Husky {
     
     @Id  // 기본키매핑 - 직접할당전략
-    private String dogId;
+    private String id;
 
     private String name;
 

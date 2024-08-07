@@ -1,7 +1,7 @@
 package com.ssh.practice;
 
-import com.ssh.entity.Food;
-import com.ssh.entity.FoodType;
+import com.ssh.entity.jpql.Food;
+import com.ssh.entity.jpql.FoodType;
 
 import jakarta.persistence.EntityManager;
 
