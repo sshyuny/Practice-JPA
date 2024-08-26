@@ -1,7 +1,6 @@
 package com.ssh;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import org.hibernate.annotations.processing.SQL;
 import org.hibernate.exception.ConstraintViolationException;
 import org.hibernate.id.IdentifierGenerationException;
 import org.junit.jupiter.api.AfterAll;

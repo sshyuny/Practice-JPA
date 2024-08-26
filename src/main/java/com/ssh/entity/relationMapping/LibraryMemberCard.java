@@ -4,21 +4,23 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table
 @Getter @Setter
-public class Book {
+public class LibraryMemberCard {
     
     @Id @GeneratedValue
-    @Column(name = "BOOK_ID")
+    @Column(name = "LIBRARY_MEMBER_CARD_ID")
     private Long id;
 
-    private String isbn;
+    private Long cardNum;
 
-    private String name;
+    @OneToOne
+    @JoinColumn(name = "LIBRARY_MEMBER_ID")
+    private LibraryMember libraryMember;
     
 }

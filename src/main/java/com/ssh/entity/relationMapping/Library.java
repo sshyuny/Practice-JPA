@@ -20,9 +20,17 @@ public class Library {
     @Column(name = "LIBRARY_ID")
     private Long id;
 
+    private String name;
+
     // 일대다 단방향
     @OneToMany
     @JoinColumn(name = "LIBRARY_ID")  // 일대다 단방향에는 @JoinColumn 필요!
     private List<Book> books = new ArrayList<>();
-    
+
+    // 일대다 양방향(사용 비권장!)
+    // 연관관계 주인
+    @OneToMany
+    @JoinColumn(name = "LIBRARY_ID")
+    private List<LibraryMember> libraryMembers = new ArrayList<>();
+
 }

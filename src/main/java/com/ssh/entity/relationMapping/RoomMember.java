@@ -4,21 +4,21 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.OneToOne;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table
 @Getter @Setter
-public class Book {
+public class RoomMember {
     
     @Id @GeneratedValue
-    @Column(name = "BOOK_ID")
+    @Column(name = "ROOM_MEMBER_ID")
     private Long id;
 
-    private String isbn;
+    @OneToOne(mappedBy = "roomMember")
+    private Room room;
 
-    private String name;
+    private String memberName;
     
 }
