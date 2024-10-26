@@ -1,4 +1,4 @@
-package com.ssh;
+package com.ssh.entity;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.hibernate.exception.ConstraintViolationException;
