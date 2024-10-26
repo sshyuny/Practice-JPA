@@ -6,10 +6,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@DiscriminatorValue("Tomato")
+@DiscriminatorValue("Salmon")
 @Getter @Setter
-public class EachTableTomatoSalad extends EachTableSalad {
-    
-    private String tomatoType;
+public class SingleTableStrategySalmonSalad extends SingleTableStrategySalad {
+
+    private String salmonOrigin;
 
 }

@@ -12,12 +12,12 @@ import lombok.Setter;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn(name = "DTYPE")
+@DiscriminatorColumn(name = "DTYPE_IN_EACH_TABLE")
 @Getter @Setter
-public abstract class EachTableSalad {
+public abstract class JoinedStrategySalad {
     
     @Id @GeneratedValue
-    @Column(name = "EACH_TABLE_COLOR_ID")
+    @Column(name = "EACH_TABLE_SALAD_ID")
     private Long id;
 
     private String sauce;
