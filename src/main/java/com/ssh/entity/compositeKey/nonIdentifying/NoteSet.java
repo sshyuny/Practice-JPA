@@ -1,4 +1,7 @@
-package com.ssh.entity.compositeKey;
+package com.ssh.entity.compositeKey.nonIdentifying;
+
+import com.ssh.entity.compositeKey.Paper;
+import com.ssh.entity.compositeKey.Pen;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

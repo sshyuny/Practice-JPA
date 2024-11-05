@@ -4,11 +4,11 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import com.ssh.entity.compositeKey.NoteSet;
 import com.ssh.entity.compositeKey.Paper;
 import com.ssh.entity.compositeKey.PaperId;
 import com.ssh.entity.compositeKey.Pen;
 import com.ssh.entity.compositeKey.PenId;
+import com.ssh.entity.compositeKey.nonIdentifying.NoteSet;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -83,6 +83,7 @@ public class CompositeKeyTest {
     @Test
     void 비식별관계_외래키매핑() {
 
+        // 부모클래스 Pen과 Paper 각각 먼저 저장
         Pen pen = new Pen();
         pen.setId1("id1");
         pen.setId2("id2");
@@ -97,6 +98,7 @@ public class CompositeKeyTest {
         paper.setName("A4용지");
         em.persist(paper);
 
+        // NoteSet 테이블은 Paper과 Pen 테이블과 비식별 관계로 FK 매핑한다.
         NoteSet set =  new NoteSet();
         set.setPen(pen);
         set.setPaper(paper);
@@ -108,4 +110,6 @@ public class CompositeKeyTest {
         NoteSet findedSet = em.find(NoteSet.class, set.getId());
         System.out.println(findedSet);
     }
+
+
 }
