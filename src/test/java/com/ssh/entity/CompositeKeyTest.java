@@ -8,6 +8,10 @@ import com.ssh.entity.compositeKey.Paper;
 import com.ssh.entity.compositeKey.PaperId;
 import com.ssh.entity.compositeKey.Pen;
 import com.ssh.entity.compositeKey.PenId;
+import com.ssh.entity.compositeKey.identifying.idclass.Pine;
+import com.ssh.entity.compositeKey.identifying.idclass.Plant;
+import com.ssh.entity.compositeKey.identifying.idclass.Tree;
+import com.ssh.entity.compositeKey.identifying.idclass.TreeId;
 import com.ssh.entity.compositeKey.nonIdentifying.NoteSet;
 
 import jakarta.persistence.EntityManager;
@@ -81,7 +85,7 @@ public class CompositeKeyTest {
     }
 
     @Test
-    void 비식별관계_외래키매핑() {
+    void 비식별관계매핑() {
 
         // 부모클래스 Pen과 Paper 각각 먼저 저장
         Pen pen = new Pen();
@@ -111,5 +115,45 @@ public class CompositeKeyTest {
         System.out.println(findedSet);
     }
 
+    @Test
+    void 식별관계매핑_어노테이션_IdClass사용() {
 
+        // Plant > Tree > Pine
+        Plant plant = new Plant();
+        plant.setName("식물");
+        em.persist(plant);
+
+        Tree tree = new Tree();
+        tree.setTreeId("TREE_ID_1");
+        tree.setPlant(plant);
+        tree.setName("나무");
+        em.persist(tree);
+
+        Pine pine = new Pine();
+        pine.setPineId("PINE_ID_1");
+        pine.setName("소나무");
+        pine.setTree(tree);
+        em.persist(pine);
+
+        em.flush();
+        em.clear();
+
+        Plant findedPlant = em.find(Plant.class, plant.getId());
+
+        TreeId treeId = new TreeId();
+        treeId.setTreeId("TREE_ID_1");
+        treeId.setPlant(findedPlant);
+
+        Tree findedTree = em.find(Tree.class, treeId);
+        System.out.println(findedTree);
+
+        // Hibernate: 
+        //     create table Pine (
+        //         TREE_ID bigint not null,
+        //         PINE_ID varchar(255) not null,
+        //         PLANT_ID varchar(255) not null,
+        //         name varchar(255),
+        //         primary key (TREE_ID, PINE_ID, PLANT_ID)
+        //     )
+    }
 }
