@@ -8,6 +8,7 @@ import com.ssh.entity.compositeKey.Paper;
 import com.ssh.entity.compositeKey.PaperId;
 import com.ssh.entity.compositeKey.Pen;
 import com.ssh.entity.compositeKey.PenId;
+import com.ssh.entity.compositeKey.identifying.embeddedid.PineId;
 import com.ssh.entity.compositeKey.identifying.idclass.Pine;
 import com.ssh.entity.compositeKey.identifying.idclass.Plant;
 import com.ssh.entity.compositeKey.identifying.idclass.Tree;
@@ -155,5 +156,74 @@ public class CompositeKeyTest {
         //         name varchar(255),
         //         primary key (TREE_ID, PINE_ID, PLANT_ID)
         //     )
+    }
+
+    @Test
+    void 식별관계매핑_어노테이션_EmbeddedId사용() {
+        // create table PLANT_E (
+        //     PLANT_ID bigint not null,
+        //     name varchar(255),
+        //     primary key (PLANT_ID)
+        // )
+        // create table TREE_E (
+        //     PLANT_ID varchar(255) not null,
+        //     TREE_ID varchar(255) not null,
+        //     name varchar(255),
+        //     primary key (PLANT_ID, TREE_E_ID)
+        // )
+        // create table PINE_E (
+        //     PINE_ID varchar(255) not null,
+        //     PLANT_ID varchar(255) not null,
+        //     TREE_ID varchar(255) not null,
+        //     name varchar(255),
+        //     primary key (PINE_ID, PLANT_ID, TREE_ID)
+        // )
+
+        // Plant > Tree > Pine
+        com.ssh.entity.compositeKey.identifying.embeddedid.Plant plant = new com.ssh.entity.compositeKey.identifying.embeddedid.Plant();
+        plant.setName("식물");
+        em.persist(plant);
+
+        com.ssh.entity.compositeKey.identifying.embeddedid.Tree tree = new com.ssh.entity.compositeKey.identifying.embeddedid.Tree();
+        tree.setTreeId(new com.ssh.entity.compositeKey.identifying.embeddedid.TreeId("id1", plant.getPlantId()));
+        tree.setPlant(plant);
+        tree.setName("나무");
+        em.persist(tree);
+
+        com.ssh.entity.compositeKey.identifying.embeddedid.Pine pine = new com.ssh.entity.compositeKey.identifying.embeddedid.Pine();
+        pine.setPineId(new PineId("id1", tree.getTreeId()));
+        pine.setName("소나무");
+        pine.setTree(tree);
+        em.persist(pine);
+
+        em.flush();
+        em.clear();
+
+        com.ssh.entity.compositeKey.identifying.embeddedid.Pine findedPine = em.find(com.ssh.entity.compositeKey.identifying.embeddedid.Pine.class, pine.getPineId());
+        System.out.println(findedPine);
+
+        // select
+        //     p1_0.PINE_ID,
+        //     p1_0.TREE_ID,
+        //     p1_0.PLANT_ID,
+        //     p1_0.name,
+        //     t1_0.PLANT_ID,
+        //     t1_0.TREE_ID,
+        //     t1_0.name,
+        //     p2_0.PLANT_ID,
+        //     p2_0.name 
+        // from
+        //     PINE_E p1_0 
+        // join
+        //     TREE_E t1_0 
+        //         on t1_0.PLANT_ID=p1_0.TREE_ID 
+        //         and t1_0.TREE_ID=p1_0.PLANT_ID 
+        // left join
+        //     PLANT_E p2_0 
+        //         on p2_0.PLANT_ID=t1_0.PLANT_ID 
+        // where
+        //     (
+        //         p1_0.PINE_ID, p1_0.TREE_ID, p1_0.PLANT_ID
+        //     ) in ((?, ?, ?))
     }
 }
