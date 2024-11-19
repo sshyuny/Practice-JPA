@@ -8,6 +8,9 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+/*
+ * 복합키 - @IdClass 사용하여 구현
+ */
 @Entity
 @IdClass(PenId.class)
 @Getter @Setter @ToString
